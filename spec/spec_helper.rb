@@ -1,7 +1,10 @@
-ENV['TESTING'] = 'true'
-
 require 'capybara/rspec'
 require 'bundler/setup'
+
+def suspenders_file_path(*args)
+  File.expand_path(File.join('..', 'lib', 'suspenders', *args), File.dirname(__FILE__))
+end
+
 require suspenders_file_path('generators', 'app_generator')
 require suspenders_file_path('actions')
 require suspenders_file_path('app_builder')
@@ -14,6 +17,3 @@ Bundler.require(:default, :test)
 
 Dir['./spec/support/**/*.rb'].each { |file| require file }
 
-def suspenders_file_path(*args)
-  File.expand_path(File.join('..', 'lib', 'suspenders', *args), File.dirname(__FILE__))
-end
